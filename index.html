@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Realistic Book</title>
 
 <style>
@@ -17,7 +19,7 @@ background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
 font-family:serif;
-overflow:hidden;
+overflow:auto;
 }
 
 .scene{
@@ -29,8 +31,10 @@ perspective:3000px;
 
 .book{
 position:relative;
-width:1200px;
-height:800px;
+width:90vw;
+height:60vw;
+max-width:1200px;
+max-height:800px;
 transform-style:preserve-3d;
 }
 
@@ -38,7 +42,7 @@ transform-style:preserve-3d;
 
 .page{
 position:absolute;
-width:600px;
+width:50%;
 height:100%;
 z-index:10;
 top:0;
@@ -173,6 +177,37 @@ transparent 80%);
 filter:blur(35px);
 pointer-events:none;
 }
+
+
+
+@media (max-width: 768px){
+
+.book{
+width:95vw;
+height:65vw;
+}
+
+.page-number{
+font-size:14px;
+}
+
+}
+
+/* запрет выделения текста */
+body{
+user-select:none;
+-webkit-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+}
+
+/* запрет перетаскивания картинок */
+img{
+pointer-events:none;
+-webkit-user-drag:none;
+user-drag:none;
+}
+
 
 </style>
 </head>
@@ -328,6 +363,38 @@ updateZ();
 }
 
 });
+
+});
+
+
+
+
+/* запрет правого клика */
+document.addEventListener("contextmenu", function(e){
+e.preventDefault();
+});
+
+/* запрет копирования */
+document.addEventListener("copy", function(e){
+e.preventDefault();
+});
+
+/* запрет выделения */
+document.addEventListener("selectstart", function(e){
+e.preventDefault();
+});
+
+/* запрет горячих клавиш */
+document.addEventListener("keydown", function(e){
+
+if(e.ctrlKey && (
+e.key === "c" || 
+e.key === "u" || 
+e.key === "s" || 
+e.key === "a"
+)){
+e.preventDefault();
+}
 
 });
 
