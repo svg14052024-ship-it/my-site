@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Realistic Book</title>
 
 <style>
@@ -19,7 +19,7 @@ background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
 font-family:serif;
-overflow:auto;
+overflow:hidden;
 }
 
 .scene{
@@ -165,7 +165,8 @@ object-fit:cover;
 
 .book-shadow{
 position:absolute;
-width:1200px;
+width:100%;
+max-width:1200px;
 height:160px;
 bottom:-90px;
 left:0;
@@ -243,12 +244,12 @@ user-drag:none;
 
 <div class="side">
 <img src="page1.png">
-<div class="page-number">1</div>
+<div class="page-number">-</div>
 </div>
 
 <div class="side back">
 <img src="page2.png">
-<div class="page-number">2</div>
+<div class="page-number">1</div>
 </div>
 
 </div>
@@ -260,12 +261,12 @@ user-drag:none;
     
 <div class="side">
 <img src="page1.png">
-<div class="page-number">1</div>
+<div class="page-number">2</div>
 </div>
 
 <div class="side back">
 <img src="page2.png">
-<div class="page-number">2</div>
+<div class="page-number">3</div>
 </div>
 
 </div>
@@ -275,12 +276,12 @@ user-drag:none;
 
 <div class="side">
 <img src="page1.png">
-<div class="page-number">3</div>
+<div class="page-number">4</div>
 </div>
 
 <div class="side back">
 <img src="page2.png">
-<div class="page-number">4</div>
+<div class="page-number">5</div>
 </div>
 
 </div>
@@ -397,6 +398,24 @@ e.preventDefault();
 }
 
 });
+
+/* блокирует масштабирование пальцами */
+document.addEventListener("touchmove", function(e){
+if(e.scale !== 1){
+e.preventDefault();
+}
+}, {passive:false});
+
+/* блокирует двойной тап */
+let lastTouchEnd = 0;
+document.addEventListener("touchend", function (event) {
+let now = (new Date()).getTime();
+if (now - lastTouchEnd <= 300) {
+event.preventDefault();
+}
+lastTouchEnd = now;
+}, false);
+
 
 </script>
 
