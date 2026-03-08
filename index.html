@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Realistic Book</title>
 
 <style>
@@ -208,7 +208,9 @@ pointer-events:none;
 -webkit-user-drag:none;
 user-drag:none;
 }
-
+html, body{
+touch-action: pinch-zoom;
+}
 
 </style>
 </head>
@@ -399,14 +401,14 @@ e.preventDefault();
 
 });
 
-/* блокирует масштабирование пальцами */
+/* блокирует масштабирование пальцами 
 document.addEventListener("touchmove", function(e){
 if(e.scale !== 1){
 e.preventDefault();
 }
 }, {passive:false});
 
-/* блокирует двойной тап */
+ блокирует двойной тап */
 let lastTouchEnd = 0;
 document.addEventListener("touchend", function (event) {
 let now = (new Date()).getTime();
